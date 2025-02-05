@@ -13,15 +13,15 @@ provider:
 
 functions:
   checkLike:
-    handler: src/functions/checkLike.handler
+    handler: src/functions/twitter/checkLike.handler
     events:
       - httpApi:
-          path: /check-like
+          path: /twitter-check-like
           method: get
 
   checkRetweet:
-    handler: src/functions/checkRetweet.handler
+    handler: src/functions/twitter/checkRetweet.handler
     events:
       - httpApi:
-          path: /check-retweet
+          path: /twitter-check-retweet
           method: get
