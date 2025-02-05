@@ -18,3 +18,10 @@ functions:
       - httpApi:
           path: /check-like
           method: get
+
+  checkRetweet:
+    handler: src/functions/checkRetweet.handler
+    events:
+      - httpApi:
+          path: /check-retweet
+          method: get
