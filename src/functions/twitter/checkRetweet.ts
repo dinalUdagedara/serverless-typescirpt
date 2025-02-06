@@ -1,4 +1,3 @@
-// src/functions/checkLike.ts
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
 import axios from 'axios';
 
@@ -34,7 +33,6 @@ export const handler = async (
     return {
       statusCode: 200,
       body: JSON.stringify({
-        tweets,
         tweetId,
         hasRetweeted,
       }),

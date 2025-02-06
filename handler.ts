@@ -1,4 +1,3 @@
-// src/functions/checkLike.ts
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from "aws-lambda";
 import axios from "axios";
 
