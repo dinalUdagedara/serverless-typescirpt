@@ -1,4 +1,3 @@
-// src/functions/checkLike.ts
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
 import axios from 'axios';
 
@@ -6,38 +5,36 @@ export const handler = async (
   event: APIGatewayProxyEventV2
 ): Promise<APIGatewayProxyResultV2> => {
   try {
-    const { userId, tweetId } = event.queryStringParameters || {};
+    const { tweetId } = event.queryStringParameters || {};
 
-    if (!userId || !tweetId) {
+    if (!tweetId) {
       return {
         statusCode: 400,
         body: JSON.stringify({
-          message: 'Missing required parameters: userId and tweetId',
+          message: 'Missing required parameters: TweetId',
         }),
       };
     }
 
-    const url = `https://api.twitter.com/2/users/${userId}/liked_tweets`;
+    const url = `https://api.twitter.com/2/tweets/${tweetId}/retweeted_by`;
     
     const response = await axios.get(url, {
       headers: {
         'Authorization': `Bearer ${process.env.TWITTER_BEARER_TOKEN}`,
       },
       params: {
-        'tweet.fields': 'id',
-        'max_results': 100,
+        'max_results': 20,
       },
     });
 
-    const likedTweets = response.data.data || [];
-    const hasLiked = likedTweets.some(tweet => tweet.id === tweetId);
+    const tweets = response.data.data || [];
+    const hasRetweeted = tweets.some(tweet => tweet.id === tweetId);
 
     return {
       statusCode: 200,
       body: JSON.stringify({
-        userId,
         tweetId,
-        hasLiked,
+        hasRetweeted,
       }),
     };
 

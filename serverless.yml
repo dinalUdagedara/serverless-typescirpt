@@ -9,19 +9,27 @@ provider:
   name: aws
   runtime: nodejs20.x
   environment:
-     TWITTER_BEARER_TOKEN: ${env:TWITTER_BEARER_TOKEN}
+    TWITTER_BEARER_TOKEN: ${env:TWITTER_BEARER_TOKEN}
+    DISCORD_BOT_TOKEN: ${env:DISCORD_BOT_TOKEN}
 
 functions:
   checkLike:
-    handler: src/functions/checkLike.handler
+    handler: src/functions/twitter/checkLike.handler
     events:
       - httpApi:
-          path: /check-like
+          path: /twitter-check-like
           method: get
 
   checkRetweet:
-    handler: src/functions/checkRetweet.handler
+    handler: src/functions/twitter/checkRetweet.handler
     events:
       - httpApi:
-          path: /check-retweet
+          path: /twitter-check-retweet
+          method: get
+
+  checkDiscordMember:
+    handler: src/functions/discord/checkDiscordMember.handler
+    events:
+      - httpApi:
+          path: /check-discord-member
           method: get
