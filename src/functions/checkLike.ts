@@ -7,7 +7,6 @@ export const handler = async (
 ): Promise<APIGatewayProxyResultV2> => {
   try {
     const { userId, tweetId } = event.queryStringParameters || {};
-
     if (!userId || !tweetId) {
       return {
         statusCode: 400,
